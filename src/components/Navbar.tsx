@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FiSun, FiMoon } from 'react-icons/fi';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 import type { Lang } from '../i18n/translations';
 
 const navIds = ['about', 'skills', 'experience', 'projects'];
@@ -12,11 +14,12 @@ const langOptions: { value: Lang; label: string }[] = [
   { value: 'pt-BR', label: 'PT' },
 ];
 
-function NavLink({ label, id, hovered, onHover }: {
+function NavLink({ label, id, hovered, onHover, theme }: {
   label: string;
   id: string;
   hovered: string | null;
   onHover: (id: string) => void;
+  theme: 'dark' | 'light';
 }) {
   return (
     <li>
@@ -29,7 +32,7 @@ function NavLink({ label, id, hovered, onHover }: {
           {hovered === id && (
             <motion.span
               layoutId="nav-pill"
-              className="absolute inset-0 rounded-lg bg-gray-800"
+              className="absolute inset-0 rounded-lg bg-gray-100 dark:bg-gray-800"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -38,7 +41,11 @@ function NavLink({ label, id, hovered, onHover }: {
           )}
         </AnimatePresence>
         <motion.span
-          animate={{ color: hovered === id ? '#ffffff' : '#9ca3af' }}
+          animate={{
+            color: hovered === id
+              ? (theme === 'dark' ? '#ffffff' : '#111827')
+              : (theme === 'dark' ? '#9ca3af' : '#4b5563'),
+          }}
           transition={{ duration: 0.15 }}
           className="relative z-10"
         >
@@ -51,6 +58,7 @@ function NavLink({ label, id, hovered, onHover }: {
 
 export default function Navbar() {
   const { t, lang, setLang } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -67,7 +75,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gray-950/90 backdrop-blur border-b border-gray-800' : ''
+        scrolled ? 'bg-white/90 dark:bg-gray-950/90 backdrop-blur border-b border-gray-200 dark:border-gray-800' : ''
       }`}
     >
       <nav
@@ -77,7 +85,7 @@ export default function Navbar() {
         {/* Left links */}
         <ul className="hidden md:flex gap-1 flex-1 justify-end">
           {leftLinks.map((label, i) => (
-            <NavLink key={navIds[i]} label={label} id={navIds[i]} hovered={hovered} onHover={setHovered} />
+            <NavLink key={navIds[i]} label={label} id={navIds[i]} hovered={hovered} onHover={setHovered} theme={theme} />
           ))}
         </ul>
 
@@ -86,14 +94,14 @@ export default function Navbar() {
           Leonardo Soares
         </a>
 
-        {/* Right links + language switcher */}
+        {/* Right links + language switcher + theme toggle */}
         <div className="hidden md:flex items-center gap-1 flex-1 justify-start">
           <ul className="flex gap-1">
             {rightLinks.map((label, i) => (
-              <NavLink key={navIds[i + 2]} label={label} id={navIds[i + 2]} hovered={hovered} onHover={setHovered} />
+              <NavLink key={navIds[i + 2]} label={label} id={navIds[i + 2]} hovered={hovered} onHover={setHovered} theme={theme} />
             ))}
           </ul>
-          <div className="flex items-center gap-0.5 ml-3 pl-3 border-l border-gray-800">
+          <div className="flex items-center gap-0.5 ml-3 pl-3 border-l border-gray-200 dark:border-gray-800">
             {langOptions.map(({ value, label }) => (
               <button
                 key={value}
@@ -101,19 +109,33 @@ export default function Navbar() {
                 className={`px-2 py-1 text-xs font-mono rounded transition-colors ${
                   lang === value
                     ? 'text-indigo-400 bg-indigo-500/10'
-                    : 'text-gray-500 hover:text-gray-300'
+                    : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                 }`}
               >
                 {label}
               </button>
             ))}
           </div>
+          <button
+            onClick={toggleTheme}
+            className="ml-2 p-1.5 rounded-lg text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <FiSun size={15} /> : <FiMoon size={15} />}
+          </button>
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden flex flex-1 justify-end">
+        <div className="md:hidden flex flex-1 justify-end gap-2">
           <button
-            className="text-gray-400 hover:text-white"
+            onClick={toggleTheme}
+            className="p-1.5 rounded-lg text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <FiSun size={15} /> : <FiMoon size={15} />}
+          </button>
+          <button
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -129,14 +151,14 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="md:hidden bg-gray-950 border-b border-gray-800 px-6 pb-4 flex flex-col gap-4"
+            className="md:hidden bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 px-6 pb-4 flex flex-col gap-4"
           >
             <ul className="flex flex-col gap-4">
               {t.nav.links.map((label, i) => (
                 <li key={navIds[i]}>
                   <a
                     href={`#${navIds[i]}`}
-                    className="text-gray-300 hover:text-white text-sm font-medium"
+                    className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm font-medium"
                     onClick={() => setMenuOpen(false)}
                   >
                     {label}
@@ -144,7 +166,7 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-1 pt-2 border-t border-gray-800">
+            <div className="flex items-center gap-1 pt-2 border-t border-gray-200 dark:border-gray-800">
               {langOptions.map(({ value, label }) => (
                 <button
                   key={value}
@@ -152,7 +174,7 @@ export default function Navbar() {
                   className={`px-2.5 py-1 text-xs font-mono rounded transition-colors ${
                     lang === value
                       ? 'text-indigo-400 bg-indigo-500/10'
-                      : 'text-gray-500 hover:text-gray-300'
+                      : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                   }`}
                 >
                   {label}

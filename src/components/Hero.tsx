@@ -68,7 +68,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="text-xl sm:text-2xl text-gray-400 mb-2 font-light"
+          className="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 mb-2 font-light"
         >
           {t.hero.subtitle}
         </motion.h2>
@@ -89,7 +89,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed"
         >
           {t.hero.description}
         </motion.p>

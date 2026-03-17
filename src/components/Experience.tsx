@@ -53,7 +53,7 @@ function GraduationMilestone({ inView, delay }: { inView: boolean; delay: number
       transition={{ delay, duration: 0.5, ease: 'easeOut' as const }}
       className="relative flex justify-center z-20"
     >
-      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rotate-45 bg-green-400 ring-4 ring-gray-950 z-10" />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rotate-45 bg-green-400 ring-4 ring-white dark:ring-gray-950 z-10" />
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <AnimatePresence>
@@ -74,11 +74,11 @@ function GraduationMilestone({ inView, delay }: { inView: boolean; delay: number
         whileHover={{ scale: 1.06 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         onMouseEnter={() => setBurstKey(k => k + 1)}
-        className="bg-gray-950 border border-green-500/50 rounded-full px-6 py-2.5 flex items-center gap-3 relative z-20 cursor-default"
+        className="bg-white dark:bg-gray-950 border border-green-500/50 rounded-full px-6 py-2.5 flex items-center gap-3 relative z-20 cursor-default"
       >
-        <span className="text-sm font-semibold text-green-400">{t.experience.graduatedLabel}</span>
-        <span className="text-gray-500 text-xs hidden sm:block">·</span>
-        <span className="text-gray-400 text-xs hidden sm:block">{t.experience.graduatedSub}</span>
+        <span className="text-sm font-semibold text-green-500 dark:text-green-400">{t.experience.graduatedLabel}</span>
+        <span className="text-gray-400 text-xs hidden sm:block">·</span>
+        <span className="text-gray-500 dark:text-gray-400 text-xs hidden sm:block">{t.experience.graduatedSub}</span>
       </motion.div>
     </motion.div>
   );
@@ -92,7 +92,7 @@ export default function Experience() {
   let jobIndex = -1;
 
   return (
-    <section id="experience" className="py-24 px-6 bg-gray-900/50">
+    <section id="experience" className="py-24 px-6 bg-gray-100/50 dark:bg-gray-900/50">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-indigo-400 font-mono text-xs uppercase tracking-widest mb-3">
@@ -102,7 +102,7 @@ export default function Experience() {
         </div>
 
         <div ref={ref} className="relative">
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gray-800 -translate-x-1/2 hidden md:block z-0" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-800 -translate-x-1/2 hidden md:block z-0" />
 
           <div className="space-y-12">
             {entries.map((entry, i) => {
@@ -120,9 +120,9 @@ export default function Experience() {
                   transition={{ delay: i * 0.12, duration: 0.55, ease: 'easeOut' as const }}
                   className={`relative md:w-1/2 ${idx % 2 === 0 ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'}`}
                 >
-                  <div className={`hidden md:block absolute top-5 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-gray-950 ${idx % 2 === 0 ? '-right-[6.5px]' : '-left-[6.5px]'}`} />
+                  <div className={`hidden md:block absolute top-5 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-white dark:ring-gray-950 ${idx % 2 === 0 ? '-right-[6.5px]' : '-left-[6.5px]'}`} />
 
-                  <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-700 transition-colors">
+                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
                     <div className="flex items-start justify-between gap-4 mb-1">
                       <h3 className="text-base font-semibold">{t.experience.jobs[idx].title}</h3>
                       <span className="text-xs text-gray-500 whitespace-nowrap mt-0.5">{entry.duration}</span>
@@ -142,10 +142,10 @@ export default function Experience() {
                       <p className="text-indigo-400 text-sm mb-1">{entry.company_name}</p>
                     )}
 
-                    <p className="text-gray-600 text-xs mb-4">{entry.location}</p>
+                    <p className="text-gray-400 dark:text-gray-600 text-xs mb-4">{entry.location}</p>
 
                     {t.experience.jobs[idx].description && (
-                      <p className="text-gray-400 text-sm leading-relaxed">{t.experience.jobs[idx].description}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t.experience.jobs[idx].description}</p>
                     )}
                   </div>
                 </motion.div>

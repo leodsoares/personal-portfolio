@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FiChevronLeft, FiChevronRight, FiExternalLink } from 'react-icons/fi';
 import projectData from '../data/projects.json';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 
 const gradients = [
   'from-indigo-600/20 to-purple-600/20',
@@ -19,6 +20,7 @@ const slideVariants = {
 
 export default function ProjectsGallery() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -54,7 +56,7 @@ export default function ProjectsGallery() {
           {/* Prev */}
           <button
             onClick={prev}
-            className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 border border-gray-800 hover:border-indigo-500/50 text-gray-400 hover:text-white transition-colors"
+            className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/50 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             aria-label="Previous project"
           >
             <FiChevronLeft size={18} />
@@ -71,37 +73,37 @@ export default function ProjectsGallery() {
                 animate="center"
                 exit="exit"
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                className={`bg-gradient-to-br ${gradient} border border-gray-800 rounded-2xl p-5 sm:p-8`}
+                className={`bg-gradient-to-br ${gradient} border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-8`}
               >
                 <div className="flex items-start justify-between gap-4 mb-2">
                   <h3 className="text-2xl font-bold leading-snug">{project.project_name}</h3>
                 </div>
 
                 <div className="flex flex-wrap gap-x-4 gap-y-0.5 mb-6">
-                  <span className="text-xs text-gray-500">
-                    <span className="text-gray-600 uppercase tracking-wider text-[10px] mr-1">Institution</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-500">
+                    <span className="text-gray-400 dark:text-gray-600 uppercase tracking-wider text-[10px] mr-1">Institution</span>
                     {project.company_institution}
                   </span>
                   {project.client && (
-                    <span className="text-xs text-gray-500">
-                      <span className="text-gray-600 uppercase tracking-wider text-[10px] mr-1">Client</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-500">
+                      <span className="text-gray-400 dark:text-gray-600 uppercase tracking-wider text-[10px] mr-1">Client</span>
                       {project.client}
                     </span>
                   )}
                   {project.consultant && (
-                    <span className="text-xs text-gray-500">
-                      <span className="text-gray-600 uppercase tracking-wider text-[10px] mr-1">Consultant</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-500">
+                      <span className="text-gray-400 dark:text-gray-600 uppercase tracking-wider text-[10px] mr-1">Consultant</span>
                       {project.consultant}
                     </span>
                   )}
                 </div>
 
-                <p className="text-gray-400 text-sm leading-relaxed mb-6">{t.gallery.projects[current].description}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">{t.gallery.projects[current].description}</p>
 
                 {project.technologies_tools.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {project.technologies_tools.map((tool) => (
-                      <span key={tool} className="text-xs bg-gray-900/70 text-gray-300 px-2.5 py-1 rounded-full border border-gray-700">
+                      <span key={tool} className="text-xs bg-white/70 dark:bg-gray-900/70 text-gray-700 dark:text-gray-300 px-2.5 py-1 rounded-full border border-gray-300 dark:border-gray-700">
                         {tool}
                       </span>
                     ))}
@@ -109,7 +111,7 @@ export default function ProjectsGallery() {
                 )}
 
                 {project.skills.length > 0 && (
-                  <p className="text-xs text-gray-600 mb-5">{project.skills.join(' · ')}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-600 mb-5">{project.skills.join(' · ')}</p>
                 )}
 
                 {project.project_url && (
@@ -130,7 +132,7 @@ export default function ProjectsGallery() {
           {/* Next */}
           <button
             onClick={next}
-            className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 border border-gray-800 hover:border-indigo-500/50 text-gray-400 hover:text-white transition-colors"
+            className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/50 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             aria-label="Next project"
           >
             <FiChevronRight size={18} />
@@ -149,7 +151,7 @@ export default function ProjectsGallery() {
               <motion.div
                 animate={{
                   width: i === current ? 24 : 8,
-                  backgroundColor: i === current ? '#6366f1' : '#374151',
+                  backgroundColor: i === current ? '#6366f1' : (theme === 'dark' ? '#374151' : '#d1d5db'),
                 }}
                 transition={{ duration: 0.3 }}
                 className="h-2 rounded-full"

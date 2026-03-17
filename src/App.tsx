@@ -1,4 +1,5 @@
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,16 +10,18 @@ import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <ProjectsGallery />
-      </main>
-      <Footer />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <ProjectsGallery />
+        </main>
+        <Footer />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

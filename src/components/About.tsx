@@ -83,7 +83,7 @@ export default function About() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             {t.about.heading}
           </h2>
-          <div className="space-y-4 text-gray-400 leading-relaxed">
+          <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
             <p>{t.about.p1}</p>
             <p>{t.about.p2}</p>
             <p>{t.about.p3}</p>
@@ -91,7 +91,7 @@ export default function About() {
 
           <div className="mt-8 flex flex-wrap gap-3">
             {t.about.stats.map(({ label, value }) => (
-              <div key={label} className="flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-full px-4 py-2">
+              <div key={label} className="flex items-center gap-2 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-full px-4 py-2">
                 <span className="text-indigo-400 font-bold text-sm">{value}</span>
                 <span className="text-gray-500 text-sm">{label}</span>
               </div>
