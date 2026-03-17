@@ -46,7 +46,7 @@ export const translations: Record<Lang, Translations> = {
     },
     hero: {
       greeting: "Hello, I'm",
-      subtitle: 'Mechanical Engineer-In-The-Making',
+      subtitle: 'Mechanical Engineer-In-Training',
       description:
         'You are looking at my latest project. The other ones involve more concrete... and contracts... and also maybe some excavators',
       viewProjects: 'View Projects',
