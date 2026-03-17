@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 type Pos = { top?: number; bottom?: number; left?: number; right?: number };
 
@@ -27,6 +28,7 @@ const smallSquares: { size: number; pos: Pos; gradient: string }[] = [
 ];
 
 export default function About() {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -76,29 +78,19 @@ export default function About() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
         >
           <p className="text-indigo-400 font-mono text-xs uppercase tracking-widest mb-3">
-            About Me
+            {t.about.eyebrow}
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            From job sites to VS Code
+            {t.about.heading}
           </h2>
           <div className="space-y-4 text-gray-400 leading-relaxed">
-            <p>
-              I'm a Mechanical EIT based in Vancouver, registered with EGBC and trained at UBC — where I also picked up a minor in Computer Science along the way. Over the past two years I've been coordinating infrastructure construction projects across the Lower Mainland, working on everything from trenchless pipeline installations to pump stations and trunk sewer replacements.
-            </p>
-            <p>
-              I like work that's tangible — the kind where you can drive past it when it's done and feel good about it.
-            </p>
-            <p>
-              Outside of work I'm usually running around Stanley Park to prepare for the next race, or working on some personal projects like music composition and this website.
-            </p>
+            <p>{t.about.p1}</p>
+            <p>{t.about.p2}</p>
+            <p>{t.about.p3}</p>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {[
-              { label: 'Languages', value: '4' },
-              { label: 'Experience', value: '2 yrs' },
-              { label: 'Coffee/day', value: '∞' },
-            ].map(({ label, value }) => (
+            {t.about.stats.map(({ label, value }) => (
               <div key={label} className="flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-full px-4 py-2">
                 <span className="text-indigo-400 font-bold text-sm">{value}</span>
                 <span className="text-gray-500 text-sm">{label}</span>

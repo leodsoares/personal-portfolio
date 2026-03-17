@@ -1,17 +1,26 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { FiExternalLink } from 'react-icons/fi';
+import { useLanguage } from '../context/LanguageContext';
+import jobData from '../data/experience.json';
 
-type Job = { type: 'job'; role: string; company: string; period: string; location: string; bullets: string[] };
-type Milestone = { type: 'milestone'; label: string; sub: string };
-type Entry = Job | Milestone;
+type JobEntry = {
+  type: 'job';
+  company_name: string;
+  job_title: string;
+  location: string;
+  duration: string;
+  company_url: string;
+  description: string;
+};
+type MilestoneEntry = { type: 'milestone' };
+type Entry = JobEntry | MilestoneEntry;
 
+// Inject graduation milestone after NaturaSeal (index 2)
 const entries: Entry[] = [
-  { type: 'job', role: 'Project Coordinator', company: 'PW Trenchless Inc',    period: 'May 2025 — Aug 2025', location: 'Surrey, BC',          bullets: [] },
-  { type: 'job', role: 'Project Coordinator', company: 'Clearway Construction', period: 'Mar 2024 — May 2025', location: 'Surrey, BC',          bullets: [] },
-  { type: 'job', role: 'Field Technician',    company: 'NaturaSeal',            period: 'Sep 2023 — Jan 2025', location: 'Lower Mainland, BC',  bullets: [] },
-  { type: 'milestone', label: '🎓 Graduated', sub: 'BASc Mechanical Engineering — UBC Okanagan · June 2023' },
-  { type: 'job', role: 'Barista',             company: 'Starbucks',             period: 'Jun 2020 — Nov 2021', location: 'Kelowna, BC',         bullets: [] },
-  { type: 'job', role: 'Residence Advisor',   company: 'UBC Okanagan',          period: 'Sep 2019 — May 2021', location: 'Kelowna, BC',         bullets: [] },
+  ...jobData.slice(0, 3).map((j) => ({ type: 'job' as const, ...j })),
+  { type: 'milestone' as const },
+  ...jobData.slice(3).map((j) => ({ type: 'job' as const, ...j })),
 ];
 
 const confettiPieces = [
@@ -33,7 +42,8 @@ const confettiPieces = [
   { x: 60,   y: -95, color: 'bg-yellow-300',  w: 8,  h: 8,  r: -75  },
 ];
 
-function GraduationMilestone({ entry, inView, delay }: { entry: Milestone; inView: boolean; delay: number }) {
+function GraduationMilestone({ inView, delay }: { inView: boolean; delay: number }) {
+  const { t } = useLanguage();
   const [burstKey, setBurstKey] = useState(0);
 
   return (
@@ -43,10 +53,8 @@ function GraduationMilestone({ entry, inView, delay }: { entry: Milestone; inVie
       transition={{ delay, duration: 0.5, ease: 'easeOut' as const }}
       className="relative flex justify-center z-20"
     >
-      {/* Diamond on the line */}
       <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rotate-45 bg-green-400 ring-4 ring-gray-950 z-10" />
 
-      {/* Confetti burst */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <AnimatePresence>
           {burstKey > 0 && confettiPieces.map((p, j) => (
@@ -62,22 +70,22 @@ function GraduationMilestone({ entry, inView, delay }: { entry: Milestone; inVie
         </AnimatePresence>
       </div>
 
-      {/* Pill */}
       <motion.div
         whileHover={{ scale: 1.06 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         onMouseEnter={() => setBurstKey(k => k + 1)}
         className="bg-gray-950 border border-green-500/50 rounded-full px-6 py-2.5 flex items-center gap-3 relative z-20 cursor-default"
       >
-        <span className="text-sm font-semibold text-green-400">{entry.label}</span>
+        <span className="text-sm font-semibold text-green-400">{t.experience.graduatedLabel}</span>
         <span className="text-gray-500 text-xs hidden sm:block">·</span>
-        <span className="text-gray-400 text-xs hidden sm:block">{entry.sub}</span>
+        <span className="text-gray-400 text-xs hidden sm:block">{t.experience.graduatedSub}</span>
       </motion.div>
     </motion.div>
   );
 }
 
 export default function Experience() {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -88,26 +96,18 @@ export default function Experience() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-indigo-400 font-mono text-xs uppercase tracking-widest mb-3">
-            Where I've Worked
+            {t.experience.eyebrow}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold">Work Experience</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">{t.experience.heading}</h2>
         </div>
 
         <div ref={ref} className="relative">
-          {/* Vertical timeline line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gray-800 -translate-x-1/2 hidden md:block z-0" />
 
           <div className="space-y-12">
             {entries.map((entry, i) => {
               if (entry.type === 'milestone') {
-                return (
-                  <GraduationMilestone
-                    key={i}
-                    entry={entry}
-                    inView={inView}
-                    delay={i * 0.12}
-                  />
-                );
+                return <GraduationMilestone key={i} inView={inView} delay={i * 0.12} />;
               }
 
               jobIndex++;
@@ -120,24 +120,33 @@ export default function Experience() {
                   transition={{ delay: i * 0.12, duration: 0.55, ease: 'easeOut' as const }}
                   className={`relative md:w-1/2 ${idx % 2 === 0 ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'}`}
                 >
-                  {/* Timeline dot */}
                   <div className={`hidden md:block absolute top-5 w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-gray-950 ${idx % 2 === 0 ? '-right-[6.5px]' : '-left-[6.5px]'}`} />
 
                   <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-gray-700 transition-colors">
                     <div className="flex items-start justify-between gap-4 mb-1">
-                      <h3 className="text-base font-semibold">{entry.role}</h3>
-                      <span className="text-xs text-gray-500 whitespace-nowrap mt-0.5">{entry.period}</span>
+                      <h3 className="text-base font-semibold">{t.experience.jobs[idx].title}</h3>
+                      <span className="text-xs text-gray-500 whitespace-nowrap mt-0.5">{entry.duration}</span>
                     </div>
-                    <p className="text-indigo-400 text-sm mb-1">{entry.company}</p>
+
+                    {entry.company_url ? (
+                      <a
+                        href={entry.company_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-400 hover:text-indigo-300 text-sm mb-1 inline-flex items-center gap-1 transition-colors"
+                      >
+                        {entry.company_name}
+                        <FiExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <p className="text-indigo-400 text-sm mb-1">{entry.company_name}</p>
+                    )}
+
                     <p className="text-gray-600 text-xs mb-4">{entry.location}</p>
-                    <ul className="space-y-2">
-                      {entry.bullets.map((b, j) => (
-                        <li key={j} className="text-gray-400 text-sm leading-relaxed flex gap-2">
-                          <span className="text-indigo-500 mt-1.5 shrink-0">▸</span>
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
+
+                    {t.experience.jobs[idx].description && (
+                      <p className="text-gray-400 text-sm leading-relaxed">{t.experience.jobs[idx].description}</p>
+                    )}
                   </div>
                 </motion.div>
               );

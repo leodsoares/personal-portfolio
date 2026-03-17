@@ -1,0 +1,52 @@
+[
+  {
+    "project_name": "Automated MagLev Syringe Controller",
+    "company_institution": "UBC Okanagan",
+    "client": "The Pakpour Lab for Microbiome Research",
+    "consultant": "",
+    "project_url": "https://pakpourlab.ca",
+    "technologies_tools": ["SolidWorks", "MATLAB", "Python", "C++", "Arduino"],
+    "skills": ["Mechanical design", "Prototyping", "Control systems", "Technical documentation", "Cross-functional collaboration"],
+    "description": "Designed and built an automated syringe controller for microbiome research as part of my mechanical engineering capstone. Working directly with the Pakpour Lab, I developed the mechanical design in SolidWorks and programmed an Arduino to control stepper motors for precise syringe actuation — translating complex research requirements into a functional precision instrument. The project sharpened my ability to work across disciplines, bridging mechanical design, embedded hardware, and biomedical research in a single deliverable."
+  },
+  {
+    "project_name": "Whistler Culvert Repair",
+    "company_institution": "PW Trenchless Inc",
+    "client": "Resort Municipality of Whistler (RMOW)",
+    "consultant": "ISL Engineering",
+    "project_url": "https://www.whistler.ca/news/whistler-weekly-key-updates-for-the-week-of-august-11/",
+    "technologies_tools": ["Revu Bluebeam", "MS Project", "MS Office Suite"],
+    "skills": ["Project management", "Budget control", "Schedule management", "Construction documentation", "Contract administration"],
+    "description": "Led a CAD $2M trenchless culvert repair project in Whistler from contract award through to final completion. Managed the full project lifecycle independently — coordinating subcontractors, tracking costs, maintaining construction documentation, and issuing change orders — while keeping the project on schedule and within budget. This was my first experience taking full ownership of a project from start to finish, and it reinforced both my technical foundation and my instinct for proactive problem solving on site."
+  },
+  {
+    "project_name": "North Road Trunk Sewer Replacement",
+    "company_institution": "Clearway Construction",
+    "client": "Metro Vancouver",
+    "consultant": "Stantec & Parsons",
+    "project_url": "https://metrovancouver.org/services/liquid-waste/north-road-sewer",
+    "technologies_tools": ["Revu Bluebeam", "Primavera P6", "GIS Systems", "MS Office Suite"],
+    "skills": ["RFI coordination", "Subcontractor management", "Stakeholder communication", "Engineering specifications", "Shoring design"],
+    "description": "Coordinated the CAD $9M replacement of the North Road Trunk Sewer in Coquitlam, one of the most technically demanding projects of my career to date. Working under strict Metro Vancouver engineering specifications, I submitted 100+ RFIs to resolve conflicts between design drawings and field conditions, and collaborated with engineering consulting firms to develop shoring solutions for excavations up to 5m deep. The scale and complexity of this project pushed me to develop sharper instincts around design interpretation, contractor coordination, and technical communication."
+  },
+  {
+    "project_name": "West Ladner Pump Station",
+    "company_institution": "Clearway Construction",
+    "client": "City of Delta",
+    "consultant": "Binnie",
+    "project_url": "https://www.delta.ca/community-culture/happening-delta/news/city-delta-secures-2-million-grant-agricultural-water",
+    "technologies_tools": ["Revu Bluebeam", "MS Project", "MS Office Suite"],
+    "skills": ["Independent project management", "Stakeholder communication", "Subcontractor management", "Cost tracking", "Progress monitoring"],
+    "description": "Managed the construction of a CAD $2M pump station in Delta with minimal supervision, overseeing day-to-day technical execution, subcontractor coordination, and stakeholder communication from start to finish. Working with limited oversight sharpened my ability to make sound decisions independently, anticipate issues before they escalated, and keep all parties aligned throughout construction. A strong test of both my technical knowledge and my judgment as a coordinator."
+  },
+  {
+    "project_name": "Personal Portfolio Website",
+    "company_institution": "Personal Project",
+    "client": "",
+    "consultant": "",
+    "project_url": "",
+    "technologies_tools": ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
+    "skills": ["Frontend development", "UI/UX design", "Animation", "Component architecture"],
+    "description": "Designed and built this portfolio website from scratch to present my engineering and coordination experience beyond the traditional resume format. Leveraged modern AI-assisted development tools to bring the project to life efficiently — making decisions on architecture, design, and content independently throughout. A project that turned out to be as much about communication and personal branding as it was about building something from the ground up."
+  }
+]
