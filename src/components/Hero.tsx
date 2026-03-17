@@ -58,7 +58,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="text-5xl sm:text-7xl font-bold mb-4 text-gradient leading-tight"
+          className="text-4xl sm:text-7xl font-bold mb-4 text-gradient leading-tight"
         >
           Leonardo Soares
         </motion.h1>

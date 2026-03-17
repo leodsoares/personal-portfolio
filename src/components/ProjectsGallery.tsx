@@ -50,7 +50,7 @@ export default function ProjectsGallery() {
           <h2 className="text-3xl sm:text-4xl font-bold">{t.gallery.heading}</h2>
         </div>
 
-        <div className="relative flex items-center gap-4">
+        <div className="relative flex items-center gap-2 sm:gap-4">
           {/* Prev */}
           <button
             onClick={prev}
@@ -71,7 +71,7 @@ export default function ProjectsGallery() {
                 animate="center"
                 exit="exit"
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                className={`bg-gradient-to-br ${gradient} border border-gray-800 rounded-2xl p-8`}
+                className={`bg-gradient-to-br ${gradient} border border-gray-800 rounded-2xl p-5 sm:p-8`}
               >
                 <div className="flex items-start justify-between gap-4 mb-2">
                   <h3 className="text-2xl font-bold leading-snug">{project.project_name}</h3>

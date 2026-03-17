@@ -41,23 +41,23 @@ export default function About() {
           initial={{ opacity: 0, x: -40 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="flex justify-start pl-8"
+          className="flex justify-center md:justify-start md:pl-8"
         >
           <div className="relative w-52 h-52">
-            {/* Small blank squares */}
+            {/* Small blank squares — desktop only to avoid mobile overflow */}
             {smallSquares.map((sq, i) => (
               <div
                 key={`sm-${i}`}
-                className={`absolute bg-gradient-to-br ${sq.gradient} rounded-lg opacity-60`}
+                className={`hidden md:block absolute bg-gradient-to-br ${sq.gradient} rounded-lg opacity-60`}
                 style={{ width: sq.size, height: sq.size, ...sq.pos }}
               />
             ))}
 
-            {/* Emoji squares */}
+            {/* Emoji squares — desktop only */}
             {emojiSquares.map((sq, i) => (
               <div
                 key={`em-${i}`}
-                className={`absolute bg-gradient-to-br ${sq.gradient} rounded-xl flex items-center justify-center shadow-lg`}
+                className={`hidden md:flex absolute bg-gradient-to-br ${sq.gradient} rounded-xl items-center justify-center shadow-lg`}
                 style={{ width: sq.size, height: sq.size, ...sq.pos }}
               >
                 <span style={{ fontSize: sq.size * 0.42 }}>{sq.emoji}</span>

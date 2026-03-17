@@ -124,7 +124,8 @@ function CollapsibleDevSection({ title }: { title: string }) {
                   )}
                 </div>
               ))}
-              <span className="ml-auto text-xs text-gray-700 italic select-none">hover to expand</span>
+              <span className="ml-auto text-xs text-gray-700 italic select-none hidden sm:inline">hover to expand</span>
+              <span className="ml-auto text-xs text-gray-700 italic select-none sm:hidden">tap to expand</span>
             </motion.div>
           )}
         </AnimatePresence>
