@@ -37,6 +37,24 @@ export type Translations = {
     readMore: string;
     projects: { description: string }[];
   };
+  projects: {
+    eyebrow: string;
+    heading: string;
+  };
+  contact: {
+    eyebrow: string;
+    heading: string;
+    subheading: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    sendButton: string;
+    successTitle: string;
+    successSub: string;
+  };
 };
 
 export const translations: Record<Lang, Translations> = {
@@ -101,6 +119,24 @@ export const translations: Record<Lang, Translations> = {
           description: 'Delivered consistent customer service in a high-volume environment while managing multiple orders simultaneously. Developed time management, teamwork, and communication skills in a fast-paced team setting.',
         },
       ],
+    },
+    projects: {
+      eyebrow: "What I've Built",
+      heading: 'Projects',
+    },
+    contact: {
+      eyebrow: 'Get In Touch',
+      heading: "Let's Talk",
+      subheading: "Have a question or want to work together? Drop me a message.",
+      nameLabel: 'Name',
+      namePlaceholder: 'Your name',
+      emailLabel: 'Email',
+      emailPlaceholder: 'your@email.com',
+      messageLabel: 'Message',
+      messagePlaceholder: "What's on your mind?",
+      sendButton: 'Send Message',
+      successTitle: 'Message sent!',
+      successSub: "Thanks for reaching out — I'll get back to you soon.",
     },
     gallery: {
       eyebrow: 'Project Showcase',
@@ -188,6 +224,24 @@ export const translations: Record<Lang, Translations> = {
         },
       ],
     },
+    projects: {
+      eyebrow: "Ce que j'ai réalisé",
+      heading: 'Projets',
+    },
+    contact: {
+      eyebrow: 'Me contacter',
+      heading: 'Parlons-en',
+      subheading: 'Une question ou envie de collaborer ? Envoyez-moi un message.',
+      nameLabel: 'Nom',
+      namePlaceholder: 'Votre nom',
+      emailLabel: 'Courriel',
+      emailPlaceholder: 'votre@courriel.com',
+      messageLabel: 'Message',
+      messagePlaceholder: 'De quoi voulez-vous parler ?',
+      sendButton: 'Envoyer',
+      successTitle: 'Message envoyé !',
+      successSub: "Merci de m'avoir contacté — je vous répondrai bientôt.",
+    },
     gallery: {
       eyebrow: 'Vitrine de projets',
       heading: "L'un après l'autre",
@@ -273,6 +327,24 @@ export const translations: Record<Lang, Translations> = {
           description: 'Prestei atendimento ao cliente consistente em um ambiente de alto volume, gerenciando múltiplos pedidos simultaneamente. Desenvolvi habilidades de gestão de tempo, trabalho em equipe e comunicação em um ambiente de equipe acelerado.',
         },
       ],
+    },
+    projects: {
+      eyebrow: 'O que construí',
+      heading: 'Projetos',
+    },
+    contact: {
+      eyebrow: 'Entre em contato',
+      heading: 'Vamos conversar',
+      subheading: 'Tem uma dúvida ou quer trabalhar juntos? Me manda uma mensagem.',
+      nameLabel: 'Nome',
+      namePlaceholder: 'Seu nome',
+      emailLabel: 'E-mail',
+      emailPlaceholder: 'seu@email.com',
+      messageLabel: 'Mensagem',
+      messagePlaceholder: 'O que você tem em mente?',
+      sendButton: 'Enviar mensagem',
+      successTitle: 'Mensagem enviada!',
+      successSub: 'Obrigado pelo contato — responderei em breve.',
     },
     gallery: {
       eyebrow: 'Vitrine de projetos',
